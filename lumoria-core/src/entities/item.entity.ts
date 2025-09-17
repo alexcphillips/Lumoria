@@ -9,8 +9,11 @@ export class Item {
   name!: string;
 
   @Column()
-  type!: string; // consumable, equipment, etc.
+  type!: string; // e.g., "weapon", "potion", "quest"
 
   @Column("json", { nullable: true })
-  effects!: Record<string, any>; // flexible map for buffs, heals, etc.
+  effects?: Record<string, any>; // e.g., { damageBonus: 10, heal: 50 }
+
+  @Column()
+  rarity!: string; // common, rare, epic, legendary
 }

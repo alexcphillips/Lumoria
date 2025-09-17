@@ -1,10 +1,10 @@
-// src/entities/enemy.entity.ts
-import { Entity, Column, PrimaryColumn } from "typeorm";
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from "typeorm";
+import { EnemyLoot } from "./enemy-loot.entity";
 
 @Entity("enemies")
 export class Enemy {
-  @PrimaryColumn()
-  enemy_id!: string;
+  @PrimaryGeneratedColumn("uuid")
+  id!: string;
 
   @Column()
   name!: string;
@@ -12,6 +12,15 @@ export class Enemy {
   @Column("json")
   attributes!: Record<string, number>; // hp, attack, defense, etc.
 
-  @Column()
-  loot_table_id!: string;
+  @OneToMany(() => EnemyLoot, (enemyLoot) => enemyLoot.enemy, { cascade: true })
+  lootTables!: EnemyLoot[];
+
+  @Column("json", { nullable: true })
+  extraLoot?: Array<{
+    itemId: string;
+    dropChance: number;
+    minQuantity?: number;
+    maxQuantity?: number;
+    uniquePerKill?: boolean;
+  }>;
 }
