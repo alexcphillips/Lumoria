@@ -1,3 +1,47 @@
+# .dockerignore for Lumoria project
 node_modules
+npm-debug.log
+.git
+.gitignore
+README.md
+.env
+.env.local
+.env.*.local
+coverage
+.nyc_output
+*.log
+logs
+tmp
+temp
+dist
+build
+lib/*.js
+lib/*.map
 mongo
 /home/ubuntu/mongo/data
+
+# Docker files
+Dockerfile*
+docker-compose*
+
+# IDE files
+.vscode
+.idea
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Test files
+test
+tests
+__tests__
+*.test.*
+*.spec.*
+
+# Documentation
+docs
+*.md

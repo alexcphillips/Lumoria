@@ -1,0 +1,50 @@
+# docker-compose.yml
+version: "3.9"
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: lumoria
+      POSTGRES_PASSWORD: lumoria
+      POSTGRES_DB: lumoria
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - "5433:5432" # Use port 5433 externally to avoid conflict
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U lumoria"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  lumoria-core:
+    build:
+      context: .
+      dockerfile: Dockerfile.core
+    environment:
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_USERNAME: lumoria
+      DB_PASSWORD: lumoria
+      DB_DATABASE: lumoria
+      JWT_SECRET: mysecret
+    ports:
+      - "3002:3000" # Use port 3002 externally to avoid conflict
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: unless-stopped
+
+  lumoria-live:
+    build:
+      context: ./lumoria-live
+      dockerfile: ../Dockerfile.live
+    environment:
+      PORT: 3001
+      NODE_ENV: production
+    ports:
+      - "3001:3001"
+    restart: unless-stopped
+
+volumes:
+  pgdata:

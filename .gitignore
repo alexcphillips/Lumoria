@@ -140,3 +140,12 @@ dist
 # Vite logs files
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
+
+# Build outputs
+dist
+build
+lib
+
+# TypeScript compiled outputs
+lumoria-core/dist/
+lumoria-live/lib/

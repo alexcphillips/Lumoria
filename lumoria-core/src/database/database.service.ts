@@ -4,10 +4,13 @@ import { ConfigService } from "@nestjs/config";
 
 @Injectable()
 export class DatabaseService {
-  constructor(private dataSource: DataSource, private config: ConfigService) {}
+  constructor(
+    private dataSource: DataSource,
+    private config: ConfigService,
+  ) {}
 
   getHost(): string {
-    return this.config.get<string>("DB_HOST", "localhost");
+    return this.config.get<string>("DB_HOST", "db");
   }
 
   getDataSource(): DataSource {
