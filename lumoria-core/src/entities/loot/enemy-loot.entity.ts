@@ -1,5 +1,5 @@
 import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from "typeorm";
-import { Enemy } from "./enemy.entity";
+import { Enemy } from "../enemy.entity";
 import { LootTable } from "./loot-table.entity";
 
 @Entity("enemy_loot")

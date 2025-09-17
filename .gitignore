@@ -149,3 +149,6 @@ lib
 # TypeScript compiled outputs
 lumoria-core/dist/
 lumoria-live/lib/
+
+# macOS system files
+.DS_Store

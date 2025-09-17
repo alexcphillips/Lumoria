@@ -1,5 +1,5 @@
 import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from "typeorm";
-import { EnemyLoot } from "./enemy-loot.entity";
+import { EnemyLoot } from "./loot/enemy-loot.entity";
 
 @Entity("enemies")
 export class Enemy {

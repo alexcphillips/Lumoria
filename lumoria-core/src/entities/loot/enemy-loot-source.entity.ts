@@ -1,6 +1,6 @@
 // src/entities/enemy-loot-source.entity.ts
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from "typeorm";
-import { Enemy } from "./enemy.entity";
+import { Enemy } from "../enemy.entity";
 import { LootTable } from "./loot-table.entity";
 
 @Entity("enemy_loot_sources")
