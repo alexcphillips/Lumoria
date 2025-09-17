@@ -12,9 +12,7 @@ RUN npm install -g tsx typescript
 
 # Copy root tsconfig and lumoria-core
 COPY tsconfig.json ./
-COPY lumoria-core/.env .env
 COPY lumoria-core ./lumoria-core/
-COPY lumoria-core/.env ./lumoria-core/
 
 # Start the app
 CMD ["npm", "run", "dev:core"]
