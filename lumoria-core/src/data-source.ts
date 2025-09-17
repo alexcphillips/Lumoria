@@ -1,8 +1,13 @@
 import { DataSource } from "typeorm";
-import { Weapon } from "./entities/weapon.entity";
 import { Item } from "./entities/item.entity";
 import { Enemy } from "./entities/enemy.entity";
 import { User } from "./entities/user.entity";
+import {
+  EnemyLoot,
+  EnemyLootSource,
+  LootTable,
+  LootTableEntry,
+} from "./entities";
 
 export const AppDataSource = new DataSource({
   type: "postgres",
@@ -11,7 +16,15 @@ export const AppDataSource = new DataSource({
   username: process.env.DB_USERNAME || "lumoria",
   password: process.env.DB_PASSWORD || "lumoria",
   database: process.env.DB_DATABASE || "lumoria",
-  entities: [Weapon, Item, Enemy, User],
+  entities: [
+    Item,
+    Enemy,
+    User,
+    EnemyLootSource,
+    EnemyLoot,
+    LootTable,
+    LootTableEntry,
+  ],
   synchronize: true, // dev only
   logging: process.env.NODE_ENV === "development",
 });
