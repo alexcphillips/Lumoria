@@ -5,7 +5,7 @@ export class HealthService {
   private startTime: number;
 
   constructor() {
-    this.startTime = Date.now(); // record app start timestamp
+    this.startTime = Date.now(); // record app start time
   }
 
   getUptime() {
