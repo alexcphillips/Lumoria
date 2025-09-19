@@ -25,13 +25,13 @@ export interface JwtPayload {
 
 @Injectable()
 export class AuthService {
-  // In-memory user store (replace with real database later)
+  // Temporary array for testing
   private users: User[] = [];
 
   constructor(@Inject(JwtService) private jwtService: JwtService) {}
 
   async register(registerDto: RegisterDto): Promise<AuthResult> {
-    // Check if user already exists
+    // Check if user exists
     const existingUser = this.users.find(
       (user) => user.email === registerDto.email,
     );
@@ -39,11 +39,11 @@ export class AuthService {
       throw new ConflictException("User with this email already exists");
     }
 
-    // Hash the password
+    // Hash password
     const saltRounds = 10;
     const hashedPassword = await bcrypt.hash(registerDto.password, saltRounds);
 
-    // Create new user
+    // Create user
     const newUser: User = {
       id: Date.now().toString(),
       email: registerDto.email,
@@ -59,7 +59,7 @@ export class AuthService {
 
     this.users.push(newUser);
 
-    // Generate JWT token
+    // jwt
     const payload: JwtPayload = {
       sub: newUser.id,
       email: newUser.email,
@@ -67,7 +67,7 @@ export class AuthService {
     };
     const access_token = this.jwtService.sign(payload);
 
-    // Return user profile (without password)
+    // return user
     const userProfile: UserProfile = {
       id: newUser.id,
       email: newUser.email,
@@ -88,13 +88,13 @@ export class AuthService {
   }
 
   async login(loginDto: LoginDto): Promise<AuthResult> {
-    // Find user by email
+    // f user by email
     const user = this.users.find((u) => u.email === loginDto.email);
     if (!user) {
       throw new UnauthorizedException("Invalid credentials");
     }
 
-    // Verify password
+    // check password
     const isPasswordValid = await bcrypt.compare(
       loginDto.password,
       user.password,
@@ -103,7 +103,7 @@ export class AuthService {
       throw new UnauthorizedException("Invalid credentials");
     }
 
-    // Generate JWT token
+    // jwt
     const payload: JwtPayload = {
       sub: user.id,
       email: user.email,
@@ -111,7 +111,7 @@ export class AuthService {
     };
     const access_token = this.jwtService.sign(payload);
 
-    // Return user profile (without password)
+    // return user
     const userProfile: UserProfile = {
       id: user.id,
       email: user.email,
@@ -145,7 +145,7 @@ export class AuthService {
       return null;
     }
 
-    // Return user profile (without password)
+    // return user
     return {
       id: user.id,
       email: user.email,
@@ -166,7 +166,7 @@ export class AuthService {
       return null;
     }
 
-    // Return user profile (without password)
+    // return user
     return {
       id: user.id,
       email: user.email,
@@ -181,7 +181,7 @@ export class AuthService {
     };
   }
 
-  // Development helper - get all users (remove in production)
+  // dev helper
   getAllUsers(): UserProfile[] {
     return this.users.map((user) => ({
       id: user.id,
@@ -197,7 +197,7 @@ export class AuthService {
     }));
   }
 
-  // Admin methods
+  // admin methods
   async deleteUser(userId: string): Promise<void> {
     const userIndex = this.users.findIndex((u) => u.id === userId);
     if (userIndex === -1) {
