@@ -4,7 +4,7 @@ import {
   SlayerType,
   RarityTier,
   ItemCategory,
-} from "./index";
+} from "../../shared";
 
 export const enemies: Enemy[] = [
   {

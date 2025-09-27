@@ -1,3 +1,3 @@
-import { Weapon } from "./index";
+import { Weapon } from "../../shared";
 
 export const weapons: Weapon[] = [];

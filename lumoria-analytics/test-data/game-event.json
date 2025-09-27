@@ -1,0 +1,11 @@
+{
+  "eventName": "loot_dropped",
+  "playerId": "p123",
+  "sessionId": "s456",
+  "timestamp": 1695843746000,
+  "payload": {
+    "enemyId": "goblin",
+    "loot": "rusty_sword",
+    "rarity": "common"
+  }
+}
